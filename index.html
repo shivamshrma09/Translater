@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>transForfree</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: mediumblue;
+    }
+
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: royalblue;
+      color: white;
+    }
+
+    .name h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .btn button {
+      margin-left: 10px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      background-color: mediumblue;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn button:hover {
+      background-color: navy;
+    }
+
+    .card {
+      height: 55vw;
+      width: 95vw;
+      background-color: skyblue;
+      margin-top: 15vw;
+      margin-left: 2.5vw;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative; /* Added for button positioning */
+    }
+
+    .text h1 {
+      color: white;
+      margin-left: 30vw;
+    }
+
+    .text p {
+      color: white;
+      margin-left: 20vw;
+    }
+
+    /* Input & Output sections */
+    .side-section {
+      width: 45vw;
+      margin-top: 0;
+    }
+
+    .side-section h1 {
+      margin-left: 10px;
+      margin-top: 3px;
+      color: white;
+      font-size: 20px;
+    }
+
+    .side-section select {
+      margin-left: 60px;
+      width: 100px;
+    }
+
+    .side-section label {
+      margin-left: 40px;
+      font-weight: bold;
+    }
+
+    .side-section textarea { /* Changed from input to textarea */
+      width: 30vw;
+      height: 32vw;
+      margin-top: 25px;
+      margin-left: 20px;
+      padding: 10px; /* Added padding for better text visibility */
+      box-sizing: border-box; /* Include padding in element's total width and height */
+      resize: none; /* Disable textarea resizing by user */
+    }
+
+    .output-section textarea { /* Changed from input to textarea */
+      background: #eaeaea;
+      color: #222;
+    }
+
+    /* Translate Button Styling */
+    .translate-button-container {
+      position: absolute;
+      top: 50%; /* Center vertically */
+      left: 50%; /* Center horizontally */
+      transform: translate(-50%, -50%); /* Adjust for perfect centering */
+      z-index: 10; /* Ensure button is above other elements */
+    }
+
+    .translate-button-container button {
+      padding: 12px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff; /* A nice blue color */
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .translate-button-container button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="head">
+    <div class="name">
+      <h1>transForfree</h1>
+    </div>
+    <div class="btn">
+      <button type="button">Home</button>
+      <button type="button">About</button>
+      <button type="button">Contact Us</button>
+    </div>
+  </div>
+
+  <div class="text">
+    <h1>Translate for free</h1>
+    <p>Translate into any language with transForfree. </p>
+  </div>
+
+  <div class="card">
+    <div class="side-section input-section">
+      <h1 class="fromto">Translate English to Hindi</h1>
+      <label for="sourceLang">Choose source language:</label><br>
+      <select id="sourceLang" name="language">
+        <option value="ab">Abkhaz</option>
+        <option value="af">Afrikaans</option>
+        <option value="sq">Albanian</option>
+        <option value="am">Amharic</option>
+        <option value="ar">Arabic</option>
+        <option value="hy">Armenian</option>
+        <option value="as">Assamese</option>
+        <option value="awa">Awadhi</option>
+        <option value="ay">Aymara</option>
+        <option value="az">Azerbaijani</option>
+        <option value="ban">Balinese</option>
+        <option value="yue">Cantonese</option>
+        <option value="zh-CN">Chinese (Simplified)</option>
+        <option value="zh-TW">Chinese (Traditional)</option>
+        <option value="cs">Czech</option>
+        <option value="da">Danish</option>
+        <option value="nl">Dutch</option>
+        <option value="en">English</option>
+        <option value="eo">Esperanto</option>
+        <option value="fi">Finnish</option>
+        <option value="fr">French</option>
+        <option value="gl">Galician</option>
+        <option value="hi">Hindi</option>
+        <option value="hu">Hungarian</option>
+        <option value="is">Icelandic</option>
+        <option value="id">Indonesian</option>
+        <option value="it">Italian</option>
+        <option value="ja">Japanese</option>
+        <option value="jw">Javanese</option>
+        <option value="kn">Kannada</option>
+        <option value="ko">Korean</option>
+        <option value="la">Latin</option>
+        <option value="lv">Latvian</option>
+        <option value="lt">Lithuanian</option>
+        <option value="mr">Marathi</option>
+        <option value="ml">Malayalam</option>
+        <option value="ne">Nepali</option>
+        <option value="no">Norwegian</option>
+        <option value="fa">Persian</option>
+        <option value="pl">Polish</option>
+        <option value="pt">Portuguese</option>
+        <option value="ro">Romanian</option>
+        <option value="ru">Russian</option>
+        <option value="sr">Serbian</option>
+        <option value="es">Spanish</option>
+        <option value="sw">Swahili</option>
+        <option value="sv">Swedish</option>
+        <option value="ta">Tamil</option>
+        <option value="te">Telugu</option>
+        <option value="th">Thai</option>
+        <option value="tr">Turkish</option>
+        <option value="uk">Ukrainian</option>
+        <option value="ur">Urdu</option>
+        <option value="vi">Vietnamese</option>
+        <option value="cy">Welsh</option>
+        <option value="xh">Xhosa</option>
+        <option value="yi">Yiddish</option>
+        <option value="zu">Zulu</option>
+      </select><br>
+      <textarea id="inputText" placeholder="Enter text to translate..."></textarea>
+    </div>
+
+    <div class="translate-button-container">
+      <button type="button" onclick="translateText()">Translate</button>
+    </div>
+
+    <div class="side-section output-section">
+      <h1>Output</h1>
+      <label for="targetLang">Choose target language:</label><br>
+      <select id="targetLang" name="outlanguage">
+        <option value="ab">Abkhaz</option>
+        <option value="af">Afrikaans</option>
+        <option value="sq">Albanian</option>
+        <option value="am">Amharic</option>
+        <option value="ar">Arabic</option>
+        <option value="hy">Armenian</option>
+        <option value="as">Assamese</option>
+        <option value="awa">Awadhi</option>
+        <option value="ay">Aymara</option>
+        <option value="az">Azerbaijani</option>
+        <option value="ban">Balinese</option>
+        <option value="yue">Cantonese</option>
+        <option value="zh-CN">Chinese (Simplified)</option>
+        <option value="zh-TW">Chinese (Traditional)</option>
+        <option value="cs">Czech</option>
+        <option value="da">Danish</option>
+        <option value="nl">Dutch</option>
+        <option value="en">English</option>
+        <option value="eo">Esperanto</option>
+        <option value="fi">Finnish</option>
+        <option value="fr">French</option>
+        <option value="gl">Galician</option>
+        <option value="hi">Hindi</option>
+        <option value="hu">Hungarian</option>
+        <option value="is">Icelandic</option>
+        <option value="id">Indonesian</option>
+        <option value="it">Italian</option>
+        <option value="ja">Japanese</option>
+        <option value="jw">Javanese</option>
+        <option value="kn">Kannada</option>
+        <option value="ko">Korean</option>
+        <option value="la">Latin</option>
+        <option value="lv">Latvian</option>
+        <option value="lt">Lithuanian</option>
+        <option value="mr">Marathi</option>
+        <option value="ml">Malayalam</option>
+        <option value="ne">Nepali</option>
+        <option value="no">Norwegian</option>
+        <option value="fa">Persian</option>
+        <option value="pl">Polish</option>
+        <option value="pt">Portuguese</option>
+        <option value="ro">Romanian</option>
+        <option value="ru">Russian</option>
+        <option value="sr">Serbian</option>
+        <option value="es">Spanish</option>
+        <option value="sw">Swahili</option>
+        <option value="sv">Swedish</option>
+        <option value="ta">Tamil</option>
+        <option value="te">Telugu</option>
+        <option value="th">Thai</option>
+        <option value="tr">Turkish</option>
+        <option value="uk">Ukrainian</option>
+        <option value="ur">Urdu</option>
+        <option value="vi">Vietnamese</option>
+        <option value="cy">Welsh</option>
+        <option value="xh">Xhosa</option>
+        <option value="yi">Yiddish</option>
+        <option value="zu">Zulu</option>
+      </select><br>
+      <textarea id="output" readonly></textarea>
+    </div>
+  </div>
+
+  <script type="text/javascript" charset="utf-8">
+    async function translateText() {
+      const text = document.getElementById("inputText").value;
+      const source = document.getElementById("sourceLang").value;
+      const target = document.getElementById("targetLang").value;
+
+      if (!text) {
+        alert("Please enter text to translate.");
+        return;
+      }
+
+      try {
+        const response = await fetch("https://libretranslate.de/translate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            q: text,
+            source: source,
+            target: target,
+            format: "text"
+          })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        document.getElementById("output").value = result.translatedText; // Use .value for textarea
+      } catch (error) {
+        console.error("Translation error:", error);
+        document.getElementById("output").value = "Error translating text. Please try again.";
+      }
+    }
+  </script>
+
+</body>
+
+</html>
