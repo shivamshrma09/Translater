@@ -63,19 +63,19 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.12);
       padding: 20px;
       display: flex;
-      flex-direction: row; /* Hamesha row mein rakhega */
+      flex-direction: row;
       gap: 20px;
       justify-content: space-between;
       align-items: flex-start;
       position: relative;
-      flex-wrap: nowrap; /* Elements ko wrap hone se roke (ek hi line mein rakhe) */
-      overflow-x: auto; /* Agar content screen se bada ho toh horizontal scrollbar de */
-      -webkit-overflow-scrolling: touch; /* iOS par smooth scrolling ke liye */
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
     .side-section {
-      flex: 1; /* Available space ko equally share karega */
-      min-width: 250px; /* Ek section ki minimum width (ise adjust kar sakte hain) */
-      max-width: 400px; /* Ek section ki maximum width */
+      flex: 1;
+      min-width: 250px;
+      max-width: 400px;
       display: flex;
       flex-direction: column;
     }
@@ -119,7 +119,7 @@
       justify-content: center;
       min-width: 120px;
       margin: 0 10px;
-      flex-shrink: 0; /* Button container ko shrink hone se roke */
+      flex-shrink: 0;
     }
     .translate-button-container button {
       padding: 14px 24px;
@@ -135,9 +135,6 @@
     .translate-button-container button:hover {
       background-color: var(--button-hover);
     }
-
-    /* Media queries hata diye gaye hain taaki layout hamesha side-by-side rahe */
-    /* Agar bahut choti screen par content overflow karta hai, toh horizontal scrollbar dikhega */
   </style>
 </head>
 <body>
@@ -147,8 +144,13 @@
     </div>
     <div class="btn">
       <button type="button">Home</button>
-      <button type="button">About</button>
-      <button type="button">Contact Us</button>
+      <button  class="change" type="submit">change</button>
+      <a href="https://github.com/shivamshrma09" target="_blank" style="text-decoration: none;">
+        <button type="button">Github profile</button>
+      </a>
+      <a href="https://www.linkedin.com/in/shivam-kumar-321810324?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" style="text-decoration: none;">
+        <button type="button">linkdin profile</button>
+      </a>
     </div>
   </div>
   <div class="container">
@@ -212,7 +214,6 @@
     </div>
   </div>
   <script>
-    // Language code to name mapping
     const langMap = {
       en: "English",
       ar: "Arabic",
@@ -234,7 +235,6 @@
       uz: "Uzbek"
     };
 
-    // Update dynamic heading
     function updateHeading() {
       const sourceLang = document.getElementById('sourceLang').value;
       const targetLang = document.getElementById('targetLang').value;
@@ -244,7 +244,6 @@
     document.getElementById('sourceLang').addEventListener('change', updateHeading);
     document.getElementById('targetLang').addEventListener('change', updateHeading);
 
-    // Translation functionality
     async function translateText() {
       const inputText = document.getElementById('inputText').value.trim();
       const sourceLang = document.getElementById('sourceLang').value;
@@ -278,8 +277,20 @@
       }
     }
 
-    // Initialize heading on load
     updateHeading();
+
+    const changeButton = document.querySelector('.change');
+    changeButton.addEventListener('click', () => {
+      const currentColor = document.body.style.backgroundColor;
+
+      if (currentColor === 'black') {
+        document.body.style.backgroundColor = 'mediumblue';
+        document.body.style.color = 'black';
+      } else {
+        document.body.style.backgroundColor = 'black';
+        document.body.style.color = 'mediumblue';
+      }
+    });
   </script>
 </body>
 </html>
