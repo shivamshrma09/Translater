@@ -5,18 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>transForfree</title>
   <style>
+    :root {
+      --primary: mediumblue;
+      --secondary: royalblue;
+      --accent: skyblue;
+      --button: #007bff;
+      --button-hover: #0056b3;
+    }
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background-color: mediumblue;
+      background-color: var(--primary);
     }
     .head {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
-      background-color: royalblue;
+      background-color: var(--secondary);
       color: white;
     }
     .name h1 {
@@ -29,86 +36,108 @@
       border: none;
       border-radius: 4px;
       font-weight: bold;
-      background-color: mediumblue;
+      background-color: var(--primary);
       color: white;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s;
     }
     .btn button:hover {
       background-color: navy;
     }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 10px;
+    }
+    .dynamic-heading {
+      color: white;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 1.3em;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
     .card {
-      height: 55vw;
-      width: 95vw;
-      background-color: skyblue;
-      margin-top: 15vw;
-      margin-left: 2.5vw;
+      background-color: var(--accent);
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      padding: 20px;
       display: flex;
-      flex-direction: row;
+      flex-direction: row; /* Hamesha row mein rakhega */
+      gap: 20px;
       justify-content: space-between;
       align-items: flex-start;
       position: relative;
-    }
-    .text h1 {
-      color: white;
-      margin-left: 30vw;
-    }
-    .text p {
-      color: white;
-      margin-left: 20vw;
+      flex-wrap: nowrap; /* Elements ko wrap hone se roke (ek hi line mein rakhe) */
+      overflow-x: auto; /* Agar content screen se bada ho toh horizontal scrollbar de */
+      -webkit-overflow-scrolling: touch; /* iOS par smooth scrolling ke liye */
     }
     .side-section {
-      width: 45vw;
-      margin-top: 0;
+      flex: 1; /* Available space ko equally share karega */
+      min-width: 250px; /* Ek section ki minimum width (ise adjust kar sakte hain) */
+      max-width: 400px; /* Ek section ki maximum width */
+      display: flex;
+      flex-direction: column;
     }
     .side-section h1 {
-      margin-left: 10px;
-      margin-top: 3px;
+      margin: 0 0 8px 0;
       color: white;
       font-size: 20px;
     }
-    .side-section select {
-      margin-left: 60px;
-      width: 120px;
-    }
     .side-section label {
-      margin-left: 40px;
       font-weight: bold;
+      margin: 8px 0 4px 0;
+      color: #222;
+    }
+    .side-section select, .side-section textarea {
+      margin-bottom: 8px;
+      font-size: 1em;
+    }
+    .side-section select {
+      width: 100%;
+      padding: 6px;
+      border-radius: 4px;
+      border: 1px solid #bbb;
     }
     .side-section textarea {
-      width: 30vw;
-      height: 32vw;
-      margin-top: 25px;
-      margin-left: 20px;
+      width: 100%;
+      height: 120px;
       padding: 10px;
-      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid #bbb;
       resize: none;
+      font-size: 1em;
+      box-sizing: border-box;
     }
     .output-section textarea {
       background: #eaeaea;
       color: #222;
     }
     .translate-button-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 120px;
+      margin: 0 10px;
+      flex-shrink: 0; /* Button container ko shrink hone se roke */
     }
     .translate-button-container button {
-      padding: 12px 20px;
+      padding: 14px 24px;
       font-size: 18px;
       border: none;
       border-radius: 5px;
-      background-color: #007bff;
+      background-color: var(--button);
       color: white;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s;
+      font-weight: bold;
     }
     .translate-button-container button:hover {
-      background-color: #0056b3;
-
+      background-color: var(--button-hover);
     }
+
+    /* Media queries hata diye gaye hain taaki layout hamesha side-by-side rahe */
+    /* Agar bahut choti screen par content overflow karta hai, toh horizontal scrollbar dikhega */
   </style>
 </head>
 <body>
@@ -122,66 +151,100 @@
       <button type="button">Contact Us</button>
     </div>
   </div>
-  <div class="text">
-    <h1>Translate for free</h1>
-    <p>Translate into any language with transForfree.</p>
-  </div>
-  <div class="card">
-    <div class="side-section input-section">
-      <h1 class="fromto">Translate</h1>
-      <label for="sourceLang">Choose source language:</label><br />
-      <select id="sourceLang" name="language">
-        <option value="en" selected>English</option>
-        <option value="ar">Arabic</option>
-        <option value="az">Azerbaijani</option>
-        <option value="zh">Chinese</option>
-        <option value="cs">Czech</option>
-        <option value="de">German</option>
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-        <option value="hi">Hindi</option>
-        <option value="it">Italian</option>
-        <option value="ja">Japanese</option>
-        <option value="ko">Korean</option>
-        <option value="pl">Polish</option>
-        <option value="pt">Portuguese</option>
-        <option value="ru">Russian</option>
-        <option value="tr">Turkish</option>
-        <option value="uk">Ukrainian</option>
-        <option value="uz">Uzbek</option>
-      </select><br />
-      <textarea id="inputText" placeholder="Enter text to translate..."></textarea>
+  <div class="container">
+    <div class="dynamic-heading" id="dynamicHeading">
+      Translate from English to Hindi
     </div>
-    <div class="translate-button-container">
-      <button type="button" onclick="translateText()">Translate</button>
-    </div>
-    <div class="side-section output-section">
-      <h1>Output</h1>
-      <label for="targetLang">Choose target language:</label><br />
-      <select id="targetLang" name="outlanguage">
-        <option value="en">English</option>
-        <option value="ar">Arabic</option>
-        <option value="az">Azerbaijani</option>
-        <option value="zh">Chinese</option>
-        <option value="cs">Czech</option>
-        <option value="de">German</option>
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-        <option value="hi" selected>Hindi</option>
-        <option value="it">Italian</option>
-        <option value="ja">Japanese</option>
-        <option value="ko">Korean</option>
-        <option value="pl">Polish</option>
-        <option value="pt">Portuguese</option>
-        <option value="ru">Russian</option>
-        <option value="tr">Turkish</option>
-        <option value="uk">Ukrainian</option>
-        <option value="uz">Uzbek</option>
-      </select><br />
-      <textarea id="output" readonly></textarea>
+    <div class="card">
+      <div class="side-section input-section">
+        <h1>Input</h1>
+        <label for="sourceLang">Choose source language:</label>
+        <select id="sourceLang" name="language">
+          <option value="en" selected>English</option>
+          <option value="ar">Arabic</option>
+          <option value="az">Azerbaijani</option>
+          <option value="zh">Chinese</option>
+          <option value="cs">Czech</option>
+          <option value="de">German</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="hi">Hindi</option>
+          <option value="it">Italian</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="pl">Polish</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="tr">Turkish</option>
+          <option value="uk">Ukrainian</option>
+          <option value="uz">Uzbek</option>
+        </select>
+        <textarea id="inputText" placeholder="Enter text to translate..."></textarea>
+      </div>
+      <div class="translate-button-container">
+        <button type="button" onclick="translateText()">Translate</button>
+      </div>
+      <div class="side-section output-section">
+        <h1>Output</h1>
+        <label for="targetLang">Choose target language:</label>
+        <select id="targetLang" name="outlanguage">
+          <option value="en">English</option>
+          <option value="ar">Arabic</option>
+          <option value="az">Azerbaijani</option>
+          <option value="zh">Chinese</option>
+          <option value="cs">Czech</option>
+          <option value="de">German</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="hi" selected>Hindi</option>
+          <option value="it">Italian</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="pl">Polish</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="tr">Turkish</option>
+          <option value="uk">Ukrainian</option>
+          <option value="uz">Uzbek</option>
+        </select>
+        <textarea id="output" readonly></textarea>
+      </div>
     </div>
   </div>
   <script>
+    // Language code to name mapping
+    const langMap = {
+      en: "English",
+      ar: "Arabic",
+      az: "Azerbaijani",
+      zh: "Chinese",
+      cs: "Czech",
+      de: "German",
+      es: "Spanish",
+      fr: "French",
+      hi: "Hindi",
+      it: "Italian",
+      ja: "Japanese",
+      ko: "Korean",
+      pl: "Polish",
+      pt: "Portuguese",
+      ru: "Russian",
+      tr: "Turkish",
+      uk: "Ukrainian",
+      uz: "Uzbek"
+    };
+
+    // Update dynamic heading
+    function updateHeading() {
+      const sourceLang = document.getElementById('sourceLang').value;
+      const targetLang = document.getElementById('targetLang').value;
+      document.getElementById('dynamicHeading').textContent =
+        `Translate from ${langMap[sourceLang]} to ${langMap[targetLang]}`;
+    }
+    document.getElementById('sourceLang').addEventListener('change', updateHeading);
+    document.getElementById('targetLang').addEventListener('change', updateHeading);
+
+    // Translation functionality
     async function translateText() {
       const inputText = document.getElementById('inputText').value.trim();
       const sourceLang = document.getElementById('sourceLang').value;
@@ -214,6 +277,9 @@
         output.value = 'Error: ' + error.message;
       }
     }
+
+    // Initialize heading on load
+    updateHeading();
   </script>
 </body>
 </html>
